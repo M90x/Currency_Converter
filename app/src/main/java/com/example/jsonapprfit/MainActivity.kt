@@ -45,6 +45,8 @@ class MainActivity : AppCompatActivity() {
                 convertBtn.setOnClickListener {
 
                     var num = inputNum.text.toString()
+
+                    //Add your code with dropdown list here ------------------
                     var result = num.toFloat() * currencies[1]
 
                     resultTV.text = ("Result: $result")

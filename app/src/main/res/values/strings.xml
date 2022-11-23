@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">jsonAppRfit</string>
 
+    <string-array name="Currencies">
+        <item>ada</item>
+        <item>aed</item>
+        <item>egp</item>
+        <item>afn</item>
+        <item>amp</item>
+    </string-array>
+
 </resources>

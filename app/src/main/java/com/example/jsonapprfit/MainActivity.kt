@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     var currencies = arrayListOf<Float>()
     var date = ""
+    lateinit var currencyItemSelected : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,35 @@ class MainActivity : AppCompatActivity() {
         inputNum = findViewById(R.id.inputUser)
 
 
+        //Dropdown List ---------------------------------------------------
+        // access the items of the list
+        val currencyItem = resources.getStringArray(R.array.Currencies)
+
+        // access the spinner
+        val spinner = findViewById<Spinner>(R.id.spinner)
+
+        if (spinner != null) {
+            val adapter = ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, currencyItem)
+            spinner.adapter = adapter
+
+            spinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>,
+                                            view: View, position: Int, id: Long) {
+
+                    currencyItemSelected = currencyItem[position].toString()
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
+            }
+        }
+
+
+        //Response API data
         val apiInterface = APIClient().getClient()?.create(APIInterface::class.java)
 
         apiInterface?.getCurrency()?.enqueue(object : Callback<Currency> {
@@ -46,12 +76,44 @@ class MainActivity : AppCompatActivity() {
 
                     var num = inputNum.text.toString()
 
-                    //Add your code with dropdown list here ------------------
-                    var result = num.toFloat() * currencies[1]
+                    if ( num.isNotEmpty()) {
 
-                    resultTV.text = ("Result: $result")
+                        //Add your code with dropdown list here ------------------
+                        if (currencyItemSelected == "ada") {
 
-                    dateTV.text = date
+                            var result = num.toFloat() * currencies[0]
+                            resultTV.text = ("Result: $result")
+                            dateTV.text = date
+
+                        } else if (currencyItemSelected == "aed") {
+
+                            var result = num.toFloat() * currencies[1]
+                            resultTV.text = ("Result: $result")
+                            dateTV.text = date
+
+                        } else if (currencyItemSelected == "egp") {
+
+                            var result = num.toFloat() * currencies[2]
+                            resultTV.text = ("Result: $result")
+                            dateTV.text = date
+
+                        } else if (currencyItemSelected == "afn") {
+
+                            var result = num.toFloat() * currencies[3]
+                            resultTV.text = ("Result: $result")
+                            dateTV.text = date
+
+                        } else {
+                            var result = num.toFloat() * currencies[4]
+                            resultTV.text = ("Result: $result")
+                            dateTV.text = date
+
+                        }
+                    }
+                    else {
+                        Toast.makeText(this@MainActivity,
+                            "Please enter the amount", Toast.LENGTH_SHORT).show()
+                    }
 
                 }
 

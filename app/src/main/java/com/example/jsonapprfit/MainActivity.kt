@@ -76,43 +76,37 @@ class MainActivity : AppCompatActivity() {
 
                     var num = inputNum.text.toString()
 
-                    if ( num.isNotEmpty()) {
+                    if (num.isNotEmpty()) {
 
                         //Add your code with dropdown list here ------------------
-                        if (currencyItemSelected == "ada") {
+                        when (currencyItemSelected) {
 
-                            var result = num.toFloat() * currencies[0]
-                            resultTV.text = ("Result: $result")
-                            dateTV.text = date
-
-                        } else if (currencyItemSelected == "aed") {
-
-                            var result = num.toFloat() * currencies[1]
-                            resultTV.text = ("Result: $result")
-                            dateTV.text = date
-
-                        } else if (currencyItemSelected == "egp") {
-
-                            var result = num.toFloat() * currencies[2]
-                            resultTV.text = ("Result: $result")
-                            dateTV.text = date
-
-                        } else if (currencyItemSelected == "afn") {
-
-                            var result = num.toFloat() * currencies[3]
-                            resultTV.text = ("Result: $result")
-                            dateTV.text = date
-
-                        } else {
-                            var result = num.toFloat() * currencies[4]
-                            resultTV.text = ("Result: $result")
-                            dateTV.text = date
-
+                            "ada" -> {
+                                resultTV.text = ("Result: ${num.toFloat() * currencies[0]}")
+                                dateTV.text = date
+                            }
+                            "aed" -> {
+                                resultTV.text = ("Result: ${num.toFloat() * currencies[1]}")
+                                dateTV.text = date
+                            }
+                            "egp" -> {
+                                resultTV.text = ("Result: ${num.toFloat() * currencies[2]}")
+                                dateTV.text = date
+                            }
+                            "afn" -> {
+                                resultTV.text = ("Result: ${num.toFloat() * currencies[3]}")
+                                dateTV.text = date
+                            }
+                            "amp" -> {
+                                resultTV.text = ("Result: ${num.toFloat() * currencies[4]}")
+                                dateTV.text = date
+                            }
                         }
-                    }
-                    else {
-                        Toast.makeText(this@MainActivity,
-                            "Please enter the amount", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Please enter the amount", Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                 }
